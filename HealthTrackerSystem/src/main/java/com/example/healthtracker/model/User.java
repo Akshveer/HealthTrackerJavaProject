@@ -3,14 +3,25 @@ package com.example.healthtracker.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "users") // Changing the table name because there was some error
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    private String name;
-    private String email;
-    private String password;
+    private Long id; // Primary key
+
+    private String name; // User's name
+    private String email; // User's email
+    private String password; // User's password
+
+    // Constructors
+    public User() {}
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 
     // Getters and Setters
     public Long getId() {
@@ -43,5 +54,16 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    // Optional: Override toString for easier debugging
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

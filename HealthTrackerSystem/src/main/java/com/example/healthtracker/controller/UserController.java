@@ -2,11 +2,14 @@ package com.example.healthtracker.controller;
 
 import com.example.healthtracker.model.User;
 import com.example.healthtracker.service.UserService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")  // Ensure this matches your endpoint
+@RequestMapping("/users")  // Ensure this matches your 
 public class UserController {
 
     @Autowired
@@ -15,6 +18,12 @@ public class UserController {
     @PostMapping
     public User createUser(@RequestBody User user) {
         return userService.saveUser(user);
+    }
+    
+    // GET method to fetch all users
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")

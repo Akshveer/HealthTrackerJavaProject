@@ -1,5 +1,6 @@
 package com.example.healthtracker.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ public class UserService {
 	public User registerUser( User user) {
 		return userRepository.save(user);
 	}
+	
+	 // Method to fetch all users
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 	
 	public User getUserByEmail(String email) {
 		return userRepository.findByEmail(email);
