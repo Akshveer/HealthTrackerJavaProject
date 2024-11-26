@@ -10,8 +10,9 @@ public class HealthMetric {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Long userId; // Maps to the user's ID (foreign key)
+    @ManyToOne // Establishes the relationship with the User entity
+    @JoinColumn(name = "user_id", nullable = false) // Maps to the user's ID as a foreign key
+    private User user; // This replaces the userId field with a reference to the User entity
 
     private double weight; // In kilograms
     private int steps; // Number of steps taken
@@ -22,8 +23,8 @@ public class HealthMetric {
     public HealthMetric() {}
 
     // Parameterized Constructor
-    public HealthMetric(Long userId, double weight, int steps, double sleepHours, LocalDate date) {
-        this.userId = userId;
+    public HealthMetric(User user, double weight, int steps, double sleepHours, LocalDate date) {
+        this.user = user;
         this.weight = weight;
         this.steps = steps;
         this.sleepHours = sleepHours;
@@ -39,12 +40,12 @@ public class HealthMetric {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public double getWeight() {

@@ -1,6 +1,7 @@
 package com.example.healthtracker.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users") // Changing the table name because there was some error
@@ -13,6 +14,9 @@ public class User {
     private String name; // User's name
     private String email; // User's email
     private String password; // User's password
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HealthMetric> healthMetrics; // List of health metrics associated with this user
 
     // Constructors
     public User() {}
@@ -56,6 +60,14 @@ public class User {
         this.password = password;
     }
 
+    public List<HealthMetric> getHealthMetrics() {
+        return healthMetrics;
+    }
+
+    public void setHealthMetrics(List<HealthMetric> healthMetrics) {
+        this.healthMetrics = healthMetrics;
+    }
+
     // Optional: Override toString for easier debugging
     @Override
     public String toString() {
@@ -64,6 +76,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", healthMetrics=" + healthMetrics +
                 '}';
     }
 }
