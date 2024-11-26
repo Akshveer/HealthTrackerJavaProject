@@ -54,5 +54,14 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+    
+    // Login (Authenticate User)
+    public User login(String email, String password) {
+        User user = userRepository.findByEmail(email);  // Fetch the user by email
+        if (user != null && user.getPassword().equals(password)) {
+            return user;  // If credentials match, return the user
+        }
+        return null;  // Return null if credentials don't match
+    }
 
 }
