@@ -22,6 +22,11 @@ public class HealthMetricService {
     public HealthMetric saveMetric(HealthMetric metric) {
         return healthMetricRepository.save(metric);
     }
+    
+    public List<HealthMetric> getHealthMetricsByUserId(Long userId) {
+        return healthMetricRepository.findByUserId(userId);  // Fetch health metrics by user ID
+    }
+
 	
 
 }

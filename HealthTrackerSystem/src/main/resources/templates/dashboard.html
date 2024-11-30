@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Health Tracker Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, <span th:text="${user.name}">User</span></h1>
+    
+    <h2>Your Health Metrics</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Weight</th>
+                <th>Steps</th>
+                <th>Sleep Hours</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="metric : ${healthMetrics}">
+                <td th:text="${metric.date}">Date</td>
+                <td th:text="${metric.weight}">Weight</td>
+                <td th:text="${metric.steps}">Steps</td>
+                <td th:text="${metric.sleepHours}">Sleep Hours</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="/dashboard/set-goal?userId=${user.id}">Set Fitness Goal</a>
+</body>
+</html>

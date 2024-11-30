@@ -33,4 +33,6 @@ public class FitnessGoalService {
     public void deleteFitnessGoal(Long id) {
         fitnessGoalRepository.deleteById(id);
     }
+    
+   
 }
