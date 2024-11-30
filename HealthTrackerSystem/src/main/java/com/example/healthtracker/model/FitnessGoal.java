@@ -90,6 +90,7 @@ public class FitnessGoal {
         this.achieved = achieved;
     }
 
+    
     // Optional: Override toString for easier debugging
     @Override
     public String toString() {
