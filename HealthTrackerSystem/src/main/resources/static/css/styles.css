@@ -1,0 +1,98 @@
+/* General Reset */
+body {
+	
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: black; /* Main background theme */
+    color: white; /* Text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Container Styling */
+.container1 {
+    background-color: transparent; /* Dark grey background for form */
+    padding: 20px;
+    border-radius: 8px;
+    border: solid #00ff00 2px; /* Updated green color */
+    width: 100%;
+    max-width: 400px; /* Responsive width */
+    box-shadow: 0px 4px 8px rgba(0, 255, 0, 0.3); /* Green shadow for pop */
+}
+
+/* Headings */
+h1 {
+    color: #00ff00; /* Updated green color */
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-size: 1em;
+    margin-bottom: 5px;
+    color: #d4d4d4; /* Lighter text color */
+}
+
+input {
+    width: 96%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #292929;
+    color: white;
+    font-size: 1em;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #00ff00; /* Updated green color */
+    box-shadow: 0px 0px 5px rgba(0, 255, 0, 0.5);
+}
+
+/* Button Styling */
+.btn {
+    background-color: #00ff00; /* Updated green color */
+    color: black;
+    font-size: 1em;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #00cc00;
+    box-shadow: 0px 4px 6px rgba(0, 255, 0, 0.4);
+}
+
+/* Alert Styling */
+.alert {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.alert.success {
+    background-color: #2e7d32; /* Success green */
+    color: white;
+}
+
+.alert.error {
+    background-color: #c62828; /* Error red */
+    color: white;
+}

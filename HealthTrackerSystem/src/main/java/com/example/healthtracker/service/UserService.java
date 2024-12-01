@@ -30,8 +30,8 @@ public class UserService {
     }
 
     // Method to save or update a user
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 
     // Method to get a user by ID

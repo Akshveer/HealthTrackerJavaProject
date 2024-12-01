@@ -3,62 +3,78 @@ package com.example.healthtracker.controller;
 import com.example.healthtracker.model.User;
 import com.example.healthtracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/users")  // Ensure this matches your request mapping
+@Controller
+@RequestMapping("/users")  // Controller for managing user interactions
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    // POST method to create a new user
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    // GET method to show the signup form
+    @GetMapping("/signup")
+    public String showSignupForm(Model model) {
+        model.addAttribute("user", new User());
+        return "signup"; // Render signup.html template
     }
 
-    // GET method to fetch all users
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    // POST method for signing up a user
+    @PostMapping("/signup")
+    public String registerUser(
+            @RequestParam String username,
+            @RequestParam String email,
+            @RequestParam String password,
+            RedirectAttributes redirectAttributes) {
+        try {
+            if (userService.getUserByEmail(email) != null) {
+                redirectAttributes.addFlashAttribute("error", "Email is already in use.");
+                return "redirect:/signup"; // Redirect back to signup page
+            }
+
+            User user = new User();
+            user.setName(username);
+            user.setEmail(email);
+            user.setPassword(password);
+            userService.saveUser(user);
+
+            redirectAttributes.addFlashAttribute("success", "Signup successful! You can now log in.");
+            return "redirect:/login"; // Redirect to login page
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "An error occurred while signing up.");
+            return "redirect:/signup";
+        }
     }
 
-    // GET method to fetch a user by ID
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
-    }
 
-    // PUT method to update user details
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        return userService.updateUser(id, user);
-    }
-
-    // DELETE method to remove a user by ID
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    // GET method to show the login form
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login"; // Render login.html template
     }
 
     // POST method for user login
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody User user) {
-        User existingUser = userService.getUserByEmail(user.getEmail()); // Finds the user by email
+    public String loginUser(
+            @RequestParam String email,
+            @RequestParam String password,
+            Model model) {
+        User existingUser = userService.getUserByEmail(email); // Finds the user by email
 
         if (existingUser == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            model.addAttribute("error", "User not found");
+            return "login"; // Stay on login page
         }
 
-        if (!existingUser.getPassword().equals(user.getPassword())) {  // Check password
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        if (!existingUser.getPassword().equals(password)) { // Check password
+            model.addAttribute("error", "Invalid credentials");
+            return "login"; // Stay on login page
         }
 
-        return ResponseEntity.ok("Login successful!");
+        model.addAttribute("user", existingUser);
+        return "redirect:/dashboard?userId=" + existingUser.getId(); // Redirect to dashboard
     }
 }
