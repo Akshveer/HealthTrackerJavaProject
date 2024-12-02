@@ -4,21 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Tracker Dashboard</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    
     <!-- Include Chart.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.0"></script>
+	
 </head>
 <body>
     <div class="container1">
         <h1 class="text-center">Health Tracker Dashboard</h1>
-        <div class="chart-container">
-            <canvas id="pieChart"></canvas>
+
+        <!-- Flexbox Row for Line Chart and Bar Graph -->
+        <div class="chart-row">
+            <div class="chart-container" id="lineChartContainer">
+                <button class="zoom-btn" id="zoomLineChartBtn">+</button>
+                <!-- Line Chart for Weight -->
+                <canvas id="lineChart" width="400" height="200"></canvas>
+            </div>
+            
+            <div class="chart-container" id="histogramChartContainer">
+                <button class="zoom-btn" id="zoomHistogramChartBtn">+</button>
+                <canvas id="histogramChart" width="400" height="200"></canvas>
+            </div>
         </div>
+
+       <div id="extraFeatures">
+        <!-- Gauge Chart below the Line and Bar Chart -->
         <div class="chart-container">
-            <canvas id="barChart"></canvas>
+            <div id="gaugeChart" style="width: 400px; height: 400px;"></div>
         </div>
-    </div>
+       </div>
+        
+        
+    
+        <div class="add-gains-container">
+			<button id="addTodaysGains">Add Today's Gains</button>
+		</div>
+		
+		<div class="goal-tab">
+   		 <p id="goal-message"></p>
+   		 <a id="goal-link" href="set-goal.html">Click here to set a goal</a>
+		</div>
+	</div>
+		
+       
+    
+    
     <!-- Include your custom dashboard.js -->
-    <script src="/js/dashboard.js"></script>		
+    <script src="/js/dashboard.js"></script>        
 </body>
 </html>
