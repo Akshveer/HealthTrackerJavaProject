@@ -183,6 +183,8 @@ h2 {
     color: #45a049; /* Darker green on hover */
 }
 
+
+
 #addTodaysGains {
     z-index: 10;
     pointer-events: auto;
@@ -193,5 +195,20 @@ h2 {
 #extraFeatures{
 	display: flex;
 }
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0f0; /* Green */
+    color: #000; /* Black text */
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #0b0; /* Darker green on hover */
+}
+
 
 

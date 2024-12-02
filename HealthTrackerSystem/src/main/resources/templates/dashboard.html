@@ -8,9 +8,7 @@
     
     <!-- Include Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.0"></script>
-	
 </head>
 <body>
     <div class="container1">
@@ -36,23 +34,19 @@
             <div id="gaugeChart" style="width: 400px; height: 400px;"></div>
         </div>
        </div>
-        
-        
-    
+
+        <!-- Add Today's Gain button -->
         <div class="add-gains-container">
-			<button id="addTodaysGains">Add Today's Gains</button>
-		</div>
-		
-		<div class="goal-tab">
-   		 <p id="goal-message"></p>
-   		 <a id="goal-link" href="set-goal.html">Click here to set a goal</a>
-		</div>
-	</div>
-		
-       
-    
-    
+			<button id="addTodaysGains" onclick="location.href='/metrics';">Add Today's Gains</button>
+        </div>
+        
+        <div class="goal-tab">
+            <p id="goal-message"></p>
+            <a id="goal-link" href="set-goal.html">Click here to set a goal</a>
+        </div>
+    </div>
+
     <!-- Include your custom dashboard.js -->
-    <script src="/js/dashboard.js"></script>        
+    <script src="/js/dashboard.js"></script>
 </body>
 </html>

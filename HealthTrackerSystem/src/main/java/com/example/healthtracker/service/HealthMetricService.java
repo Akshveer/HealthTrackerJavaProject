@@ -10,23 +10,17 @@ import com.example.healthtracker.repository.HealthMetricRepository;
 
 @Service
 public class HealthMetricService {
-	@Autowired
-	// Using autowired means asking Spring to open the tool box and give a specific tool (bean) you need
-	
-	 private HealthMetricRepository healthMetricRepository;
 
+    @Autowired
+    private HealthMetricRepository healthMetricRepository;
+
+    // Fetch health metrics by user ID
     public List<HealthMetric> getMetricsByUserId(Long userId) {
         return healthMetricRepository.findByUserId(userId);
     }
 
+    // Save a new health metric
     public HealthMetric saveMetric(HealthMetric metric) {
-        return healthMetricRepository.save(metric);
+        return healthMetricRepository.save(metric);  // Save the metric and return the saved instance
     }
-    
-    public List<HealthMetric> getHealthMetricsByUserId(Long userId) {
-        return healthMetricRepository.findByUserId(userId);  // Fetch health metrics by user ID
-    }
-
-	
-
 }

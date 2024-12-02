@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
-	
-	// Fetch the user ID from the session (assumes you're setting it in the session on login)
+    // Fetch the user ID from the session (assumes you're setting it in the session on login)
     const userId = sessionStorage.getItem('loggedInUserId');
     
     // Extract the userId from the URL query parameter
@@ -10,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Use the userId from URL if not found in sessionStorage
     const finalUserId = userId || userIdFromUrl;
-	
+    
     if (!finalUserId) {
         console.error("User not logged in");
         return; // Don't proceed if user ID is not available
@@ -175,23 +173,26 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => {
             console.error("Error fetching or displaying health metrics:", error);
         });
-		
-		document.addEventListener("DOMContentLoaded", () => {
-		    const addTodaysGainsButton = document.getElementById('addTodaysGains');
-		    if (addTodaysGainsButton) {
-		        addTodaysGainsButton.addEventListener('click', () => {
-		            window.location.href = "/health-metrics.html";
-		        });
-		    } else {
-		        console.error("Add Today's Gains button not found in DOM");
-		    }
-		});
 
-		document.getElementById('addTodaysGains').addEventListener('click', () => {
-		    window.location.href = "/health-metrics.html";
-		});
+    // Add event listener for "Add Today's Gains" button
+    const addTodaysGainsButton = document.getElementById('addTodaysGains');
+    if (addTodaysGainsButton) {
+        addTodaysGainsButton.addEventListener('click', () => {
+            window.location.href = "/metrics"; // Redirect to metrics page
+        });
+    } else {
+        console.error("Add Today's Gains button not found in DOM");
+    }
+	
+	fetch('/metrics', {
+	    method: 'POST',
+	    headers: {
+	        'Content-Type': 'application/json',
+	    },
+	    body: JSON.stringify({ /* your data */ })
+	})
+	.then(response => response.json())
+	.then(data => console.log(data))
+	.catch(error => console.error(error));
 
-		
 });
-
-

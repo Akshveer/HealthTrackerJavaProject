@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Metrics</title>
+<script>
+document.getElementById('addTodaysGains').addEventListener('click', function() {
+    window.location.href = '/metrics';
+});
+</script>
+</head>
+<body>
+    <h1>Health Metrics Dashboard</h1>
+    <form action="/metrics" method="post">
+        <label for="gains">Enter Today's Gains:</label>
+        <input type="text" id="gains" name="gains" required>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
