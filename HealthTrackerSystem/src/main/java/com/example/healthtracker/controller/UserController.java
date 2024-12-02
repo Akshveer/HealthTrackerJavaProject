@@ -2,6 +2,9 @@ package com.example.healthtracker.controller;
 
 import com.example.healthtracker.model.User;
 import com.example.healthtracker.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +51,8 @@ public class UserController {
             return "redirect:/signup";
         }
     }
+    
+    
 
 
     // GET method to show the login form
@@ -61,7 +66,9 @@ public class UserController {
     public String loginUser(
             @RequestParam String email,
             @RequestParam String password,
+            HttpServletRequest request, // Added HttpServletRequest to work with session
             Model model) {
+
         User existingUser = userService.getUserByEmail(email); // Finds the user by email
 
         if (existingUser == null) {
@@ -74,7 +81,10 @@ public class UserController {
             return "login"; // Stay on login page
         }
 
+        // Store the user ID in the server-side session
+        request.getSession().setAttribute("loggedInUserId", existingUser.getId());
+
         model.addAttribute("user", existingUser);
-        return "redirect:/dashboard?userId=" + existingUser.getId(); // Redirect to dashboard
+        return "redirect:/dashboard?userId=" + existingUser.getId(); // Redirect to dashboard with userId
     }
 }

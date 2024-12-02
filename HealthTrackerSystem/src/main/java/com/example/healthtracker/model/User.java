@@ -3,6 +3,8 @@ package com.example.healthtracker.model;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "users") // Changing the table name because there was some error
 public class User {
@@ -16,6 +18,7 @@ public class User {
     private String password; // User's password
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference // Allow serialization of HealthMetrics from User
     private List<HealthMetric> healthMetrics; // List of health metrics associated with this user
 
     // Constructors

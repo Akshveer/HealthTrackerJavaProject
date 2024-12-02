@@ -55,12 +55,15 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    // Method to authenticate the user (login)
-    public User login(String email, String password) {
-        User user = getUserByEmail(email);  // Reuse getUserByEmail method
+    // Authenticate user by email and password
+    public User authenticate(String email, String password) {
+        // Find the user by email
+        User user = userRepository.findByEmail(email);
         if (user != null && user.getPassword().equals(password)) {
-            return user;  // If credentials match, return the user
+            // Password matches, return user
+            return user;
         }
-        return null;  // Return null if credentials don't match
+        // If no user found or password doesn't match
+        return null;
     }
 }

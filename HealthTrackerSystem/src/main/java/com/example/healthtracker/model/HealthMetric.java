@@ -3,6 +3,8 @@ package com.example.healthtracker.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class HealthMetric {
 
@@ -12,6 +14,7 @@ public class HealthMetric {
 
     @ManyToOne // Establishes the relationship with the User entity
     @JoinColumn(name = "user_id", nullable = false) // Maps to the user's ID as a foreign key
+    @JsonBackReference // Prevent serialization of User from HealthMetric
     private User user; // This replaces the userId field with a reference to the User entity
 
     private double weight; // In kilograms
@@ -78,5 +81,24 @@ public class HealthMetric {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    /**
+     * This method returns the value of a specific metric based on the input.
+     * 
+     * @param metricType The type of metric to return (weight, steps, or sleepHours)
+     * @return The value of the specified metric
+     */
+    public Object getValue(String metricType) {
+        switch (metricType) {
+            case "weight":
+                return this.weight;
+            case "steps":
+                return this.steps;
+            case "sleep":
+                return this.sleepHours;
+            default:
+                return null;
+        }
     }
 }

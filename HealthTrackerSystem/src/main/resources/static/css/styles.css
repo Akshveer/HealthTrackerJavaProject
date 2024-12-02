@@ -96,3 +96,20 @@ input:focus {
     background-color: #c62828; /* Error red */
     color: white;
 }
+
+/*For Dashboard.html page*/
+
+.chart-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    background-color: #1a1a1a;
+    border: 1px solid #00ff00;
+    border-radius: 10px;
+}
+
