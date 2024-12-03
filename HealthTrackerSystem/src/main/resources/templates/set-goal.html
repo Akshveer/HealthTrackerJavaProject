@@ -2,15 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/set-goal.css">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Set Fitness Goal</title>
 </head>
 <body>
     <h1>Set Your Fitness Goal</h1>
-    <form action="/dashboard/set-goal" method="post">
-        <input type="hidden" name="userId" th:value="${user.id}" />
+    <form action="/fitness-goal/create" method="post">
+        <input type="hidden" name="userId" />
 
         <label for="goalType">Goal Type:</label>
         <select id="goalType" name="goalType" required>

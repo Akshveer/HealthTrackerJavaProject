@@ -1,0 +1,105 @@
+/* set-goal.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Black background */
+    color: #0f0; /* Green text */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Flexbox for centering content */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    height: 100vh;
+}
+
+h1 {
+    color: #0f0; /* Green heading */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem; /* Responsive font size */
+}
+
+form {
+    background-color: #111; /* Slightly lighter black for the form background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width: 90%; /* Use 90% width for smaller screens */
+    max-width: 400px; /* Limit form width on larger screens */
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #0f0;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px; /* Consistent padding */
+    margin-bottom: 15px;
+    border: 1px solid #0f0;
+    border-radius: 5px;
+    background-color: #222; /* Dark gray input background */
+    color: #0f0;
+    font-size: 14px;
+    height: 40px; /* Fixed height for consistency */
+    box-sizing: border-box; /* Includes padding and border in height/width */
+}
+
+input::placeholder {
+    color: #0f0;
+    opacity: 0.8;
+}
+
+button {
+    background-color: #0f0;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #080;
+}
+
+button:active {
+    background-color: #050;
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%230f0' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 6px;
+}
+
+/* Ensure consistent height for select elements */
+select {
+    height: 40px; /* Matches input height */
+    padding-right: 30px; /* To account for dropdown arrow */
+}
+
+form input[type="date"] {
+    color-scheme: dark; /* Ensures date picker matches the theme */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem; /* Smaller font size for smaller screens */
+    }
+
+    form {
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    input, select, button {
+        font-size: 13px; /* Adjust font size for smaller screens */
+    }
+}

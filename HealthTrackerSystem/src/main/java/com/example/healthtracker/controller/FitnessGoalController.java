@@ -1,45 +1,37 @@
 package com.example.healthtracker.controller;
 
 import com.example.healthtracker.model.FitnessGoal;
+import com.example.healthtracker.model.User; // Correctly imported at the top
 import com.example.healthtracker.service.FitnessGoalService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
-@RestController
-@RequestMapping("/api/fitness-goals")
+@Controller
+@RequestMapping("/fitness-goal")
 public class FitnessGoalController {
 
     @Autowired
     private FitnessGoalService fitnessGoalService;
 
-    // Create or update a fitness goal
-    @PostMapping
-    public ResponseEntity<FitnessGoal> createFitnessGoal(@RequestBody FitnessGoal fitnessGoal) {
-        FitnessGoal savedGoal = fitnessGoalService.saveFitnessGoal(fitnessGoal);
-        return ResponseEntity.ok(savedGoal);
-    }
-
-    // Get all fitness goals
+    // Render the Set Goal Page
     @GetMapping
-    public List<FitnessGoal> getAllFitnessGoals() {
-        return fitnessGoalService.getAllFitnessGoals();
+    public String showSetGoalPage() {
+        return "set-goal"; // Renders the "set-goal.html" Thymeleaf template
     }
 
-    // Get a fitness goal by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<FitnessGoal> getFitnessGoalById(@PathVariable Long id) {
-        Optional<FitnessGoal> fitnessGoal = fitnessGoalService.getFitnessGoalById(id);
-        return fitnessGoal.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+    // Create or update a fitness goal
+    @PostMapping("/create")
+    public String createFitnessGoal(@ModelAttribute FitnessGoal fitnessGoal, @RequestParam Long userId) {
+        // Create a User object from the userId
+        User user = new User();
+        user.setId(userId); // Set the ID (assuming User has an `id` field)
+        fitnessGoal.setUser(user); // Associate the user with the fitness goal
 
-    // Delete a fitness goal by ID
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFitnessGoal(@PathVariable Long id) {
-        fitnessGoalService.deleteFitnessGoal(id);
-        return ResponseEntity.noContent().build();
+        // Save the fitness goal
+        fitnessGoalService.saveFitnessGoal(fitnessGoal);
+
+        // Redirect to the same page or another success page
+        return "redirect:/fitness-goal";
     }
 }
