@@ -15,4 +15,6 @@ public class AuthController {
     public String showSignupPage() {
         return "signup"; // Corresponds to signup.html template
     }
+    
+   
 }

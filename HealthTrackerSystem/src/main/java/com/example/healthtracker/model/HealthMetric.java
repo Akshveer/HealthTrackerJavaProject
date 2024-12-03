@@ -15,18 +15,19 @@ public class HealthMetric {
     @ManyToOne // Establishes the relationship with the User entity
     @JoinColumn(name = "user_id", nullable = false) // Maps to the user's ID as a foreign key
     @JsonBackReference // Prevent serialization of User from HealthMetric
+
     private User user; // This replaces the userId field with a reference to the User entity
 
     private double weight; // In kilograms
     private int steps; // Number of steps taken
     private double sleepHours; // Hours of sleep
-    private LocalDate date; // Date of the record
+    private String date; // Date of the record
 
     // Default Constructor (required by JPA)
     public HealthMetric() {}
 
     // Parameterized Constructor
-    public HealthMetric(User user, double weight, int steps, double sleepHours, LocalDate date) {
+    public HealthMetric(User user, double weight, int steps, double sleepHours, String date) {
         this.user = user;
         this.weight = weight;
         this.steps = steps;
@@ -75,12 +76,12 @@ public class HealthMetric {
         this.sleepHours = sleepHours;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDate(String date2) {
+        this.date = date2;
     }
 
     /**
